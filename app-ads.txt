@@ -1,3 +1,2 @@
 # Fichier exigé par AdMob (https://iabtechlab.com/ads-txt/) : à la racine du site déclaré sur le Play Store.
-# Remplacer pub-0000000000000000 par l identifiant d éditeur AdMob (AdMob > Paramètres > Informations sur le compte).
-google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+google.com, pub-3916521058359473, DIRECT, f08c47fec0942fa0
