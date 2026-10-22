@@ -1,0 +1,18 @@
+# Cours du jour publiés dans l'app DZ Connect (écran Taux de change, accueil, résumé du matin).
+# À mettre à jour chaque matin. Les lignes qui commencent par # sont des explications, ignorées par l'app.
+#
+# 1. Mettre la date du jour (année-mois-jour). Sans date à jour (plus de 2 jours), l'app
+#    revient aux cours lus dans la presse : un oubli n'affiche jamais un vieux chiffre.
+# 2. Square : « DEVISE: achat / vente » en dinars pour 1 unité (ou seulement la vente).
+#    Devises possibles : EUR, USD, GBP, CAD, CHF.
+# 3. Or : « OR xx carats: prix du gramme » en dinars.
+# Une ligne mal tapée ou un chiffre aberrant (ex. 2770 au lieu de 277) est ignoré.
+# Pour retirer une ligne, mettre un # devant.
+
+date: 2026-10-22
+EUR: 277.00
+USD: 243.00
+GBP: 317.00
+CAD: 173.00
+OR 18 carats: 23 550
+OR 21 carats: 27 480
