@@ -1,0 +1,57 @@
+# Réglages de l'app DZ Connect, modifiables sans publier de nouvelle version.
+# L'app relit ce fichier toutes les 6 heures (GitHub Pages ajoute jusqu'à 10 minutes).
+# Les lignes qui commencent par # sont des explications, ignorées par l'app.
+# Une ligne mal tapée est ignorée : l'app garde alors ses valeurs d'origine.
+
+# ---------------------------------------------------------------- Ramadan
+# Décalage en jours par rapport au calendrier Umm al-Qura du téléphone, à régler après
+# l'annonce officielle en Algérie : 0 (aucun), 1 (un jour plus tard), -1 (un jour plus tôt).
+ramadan_decalage = 0
+
+# ---------------------------------------------------------------- Sources d'articles
+# Couper une source (nom exact, comme dans le menu → À propos → Sources) :
+# source_off = El Khabar
+#
+# Ajouter une source : nom | adresse du flux RSS (https) | rubrique
+# Rubriques : ALGERIE, DIASPORA, PRATIQUE, VOYAGE, FOOT, TECH (ou rien : classée selon le contenu).
+# Vérifier d'abord que le média autorise la reprise de son flux.
+# source = TSA Algérie | https://www.tsa-algerie.com/feed/ | ALGERIE
+
+# ---------------------------------------------------------------- Ferries
+# Une ligne par compagnie et par trajet :
+#   ferry = port d'Europe > port d'Algérie | compagnie | fréquence | fréquence en arabe (facultatif)
+# Ports : Marseille, Sète, Alicante, Valence, Barcelone, Almería > Alger, Oran, Mostaganem,
+#         Ghazaouet, Béjaïa, Skikda, Annaba.
+# Compagnies : Algérie Ferries, Corsica Linea, GNV, Baleària, Nouris Elbahr Ferries.
+# Ces lignes REMPLACENT celles de l'app : un trajet retiré ici disparaît de l'onglet Ferry.
+# Sans traduction arabe, la fréquence s'affiche en français dans l'app en arabe (sauf les
+# fréquences déjà connues de l'app, comme ci-dessous).
+ferry = Marseille > Alger | Algérie Ferries | toute l'année, jusqu'à 2 par semaine en été
+ferry = Marseille > Alger | Corsica Linea | chaque semaine, 3 par semaine en été
+ferry = Marseille > Alger | Nouris Elbahr Ferries | chaque semaine, de mi-juin à fin octobre
+ferry = Marseille > Oran | Algérie Ferries | 2 à 4 par mois, toute l'année
+ferry = Marseille > Béjaïa | Algérie Ferries | environ 4 par mois
+ferry = Marseille > Béjaïa | Corsica Linea | toutes les 1 à 2 semaines
+ferry = Marseille > Skikda | Algérie Ferries | environ 3 par mois
+ferry = Marseille > Skikda | Corsica Linea | chaque semaine
+ferry = Marseille > Annaba | Algérie Ferries | été seulement (juillet – septembre)
+ferry = Sète > Alger | GNV | chaque semaine, toute l'année
+ferry = Sète > Alger | Algérie Ferries | été (mi-juin – mi-septembre)
+ferry = Sète > Oran | Algérie Ferries | été (mi-juin – mi-septembre)
+ferry = Sète > Béjaïa | GNV | chaque semaine
+ferry = Sète > Béjaïa | Corsica Linea | été (mi-juin – mi-septembre)
+ferry = Sète > Béjaïa | Algérie Ferries | été (mi-juin – mi-septembre)
+ferry = Sète > Skikda | Corsica Linea | été (mi-juin – mi-septembre)
+ferry = Sète > Skikda | Algérie Ferries | été (mi-juin – mi-septembre)
+ferry = Sète > Annaba | Algérie Ferries | été (mi-juin – mi-septembre)
+ferry = Alicante > Alger | Algérie Ferries | jusqu'à 2 par semaine
+ferry = Alicante > Alger | Nouris Elbahr Ferries | 1 à 2 par semaine
+ferry = Alicante > Oran | Algérie Ferries | chaque semaine
+ferry = Alicante > Oran | Nouris Elbahr Ferries | 1 à 2 par semaine
+ferry = Valence > Alger | Baleària | chaque semaine ou tous les 15 jours
+ferry = Valence > Oran | Baleària | 1 à 2 par semaine
+ferry = Valence > Mostaganem | Baleària | chaque semaine, en alternance avec Oran
+ferry = Barcelone > Alger | Baleària | environ tous les 15 jours
+ferry = Barcelone > Oran | Baleària | fréquence à vérifier
+ferry = Almería > Oran | Baleària | le mardi, de septembre 2026 à janvier 2027
+ferry = Almería > Ghazaouet | Baleària | le vendredi, de septembre 2026 à janvier 2027
