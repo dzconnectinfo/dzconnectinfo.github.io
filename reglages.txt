@@ -17,6 +17,12 @@ ramadan_decalage = 0
 # Vérifier d'abord que le média autorise la reprise de son flux.
 # source = TSA Algérie | https://www.tsa-algerie.com/feed/ | ALGERIE
 
+# ---------------------------------------------------------------- Sujets du moment
+# Proposés en premier dans la recherche (avec le nombre d'articles), s'ils ont des articles :
+# un par ligne, mot court tel qu'écrit dans les titres. L'app en propose déjà d'autres (Visa, Consulat…).
+# sujet = AADL
+# sujet = Bac 2027
+
 # ---------------------------------------------------------------- Partenaires
 # Carte « Préparer votre arrivée » (pages Vols et Ferry) : une ligne par lien partenaire
 # Travelpayouts (Outils → générateur de liens, adresse en https). Ligne absente ou avec # devant :
