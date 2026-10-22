@@ -24,7 +24,10 @@ ramadan_decalage = 0
 # lien_esim = https://…        (Airalo, page eSIM Algérie)
 # lien_voiture = https://…     (DiscoverCars, page Algérie)
 # lien_assurance = https://…   (EKTA)
+# Prix d'appel affiché « dès … » sur la bannière (facultatif, à mettre à jour si le partenaire change ses tarifs) :
+# prix_esim = 19,50 $   (prix_voiture, prix_assurance de la même façon)
 lien_esim = https://airalo.tpx.li/vizkeupo
+prix_esim = 19,50 $
 
 # ---------------------------------------------------------------- Ferries
 # Une ligne par compagnie et par trajet :
