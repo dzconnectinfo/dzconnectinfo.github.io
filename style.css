@@ -74,3 +74,5 @@ footer a { margin: 0 8px; }
   .hero h1 { font-size: 28px; }
   article { padding: 4px 16px 16px; }
 }
+.store { display: inline-block; margin-top: 8px; }
+.store img { display: block; max-width: 100%; height: auto; }
