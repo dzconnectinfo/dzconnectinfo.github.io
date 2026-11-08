@@ -35,6 +35,15 @@ ramadan_decalage = 0
 lien_esim = https://airalo.tpx.li/vizkeupo
 prix_esim = 19,50 $
 
+# ---------------------------------------------------------------- Réseaux de DZ Connect
+# Logos « Suivez-nous » du menu et de « À propos » (version 10 et plus). Chaîne WhatsApp : enlever le #
+# et coller son lien (WhatsApp → Actus → votre chaîne → Partager le lien) ; sans lien, son logo n'apparaît pas.
+# Les autres lignes ne servent qu'à changer un lien sans mise à jour de l'appli.
+lien_whatsapp = https://whatsapp.com/channel/0029VbDgWKNFCCoMbUskVl0R
+# lien_instagram = https://www.instagram.com/dzconnect.app/
+# lien_tiktok = https://www.tiktok.com/@dzconnect.app
+# lien_facebook = https://www.facebook.com/profile.php?id=61595925599903
+
 # ---------------------------------------------------------------- Ferries
 # Une ligne par compagnie et par trajet :
 #   ferry = port d'Europe > port d'Algérie | compagnie | fréquence | fréquence en arabe (facultatif)
