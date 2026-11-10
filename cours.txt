@@ -9,11 +9,11 @@
 # Une ligne mal tapée ou un chiffre aberrant (ex. 2770 au lieu de 277) est ignoré.
 # Pour retirer une ligne, mettre un # devant.
 
-date: 2026-11-09 9H00
+date: 2026-11-10 9H00
 EUR: 274.5 / 276.5
 USD: 242 / 245
-GBP: 313 / 317
-CAD: 172 / 173.5
-OR 18 carats: 23 850
-OR 21 carats: 27 830
+GBP: 313 / 316
+CAD: 171 / 172.5
+OR 18 carats: 24 010
+OR 21 carats: 28 010
 OR Cassé: 23 200
