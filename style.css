@@ -76,3 +76,67 @@ footer a { margin: 0 8px; }
 }
 .store { display: inline-block; margin-top: 8px; }
 .store img { display: block; max-width: 100%; height: auto; }
+
+/* ------------------------------------------------ Ajouts : téléchargement, réseaux, cours, guide */
+header nav { align-items: center; }
+.nav-dl { background: var(--green); color: #fff !important; padding: 6px 14px; border-radius: 999px; font-weight: 700; }
+@media (prefers-color-scheme: dark) { .nav-dl { color: #00391F !important; } }
+nav a[aria-current="page"]:not(.nav-dl) { font-weight: 700; text-decoration: underline; }
+
+.button.big { font-size: 19px; padding: 16px 34px; }
+.hero .store { margin-top: 14px; }
+.hero .lead-dl { margin-top: 10px; font-size: 15px; }
+.notice { background: var(--todo); border-radius: 12px; padding: 12px 16px; margin: 20px auto 0; max-width: 560px; font-size: 15px; text-align: left; }
+.qr { margin-top: 24px; }
+.qr img { background: #fff; border-radius: 12px; padding: 6px; }
+.qr p { font-size: 15px !important; }
+.steps { margin-bottom: 24px; }
+.steps h2 { font-size: 19px; }
+.steps ol { margin: 8px 0 0; padding-left: 22px; }
+.steps li { margin-bottom: 10px; }
+.copy { display: inline-block; margin-top: 6px; font: inherit; font-size: 14px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--green); background: transparent; color: var(--green); cursor: pointer; }
+code { background: var(--mint); padding: 1px 6px; border-radius: 6px; font-size: 15px; word-break: break-all; }
+
+.social { display: flex; justify-content: center; gap: 14px; margin-bottom: 14px; }
+.social a { margin: 0; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--mint); color: var(--green); }
+.social svg { width: 21px; height: 21px; }
+.follow { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 8px 0 48px; }
+.follow a { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); font-weight: 700; }
+.follow a small { display: block; font-weight: 400; color: var(--muted); font-size: 13px; }
+.follow svg { width: 26px; height: 26px; color: var(--green); flex: none; }
+
+h2.section { font-size: 22px; margin: 8px 0 12px; }
+.gallery { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; margin-bottom: 40px; }
+.gallery img { flex: none; width: 260px; height: 260px; border-radius: 16px; scroll-snap-align: start; }
+
+.cta { text-align: center; background: var(--mint); border-radius: 16px; padding: 24px 18px; margin: 0 0 48px; }
+.cta h2 { margin: 0 0 6px; font-size: 21px; }
+.cta p { margin: 0; color: var(--muted); }
+.cta .button { margin-top: 16px; }
+
+/* Cours du jour */
+.rates { width: 100%; display: table; font-size: 17px; }
+.rates td, .rates th { text-align: right; }
+.rates td:first-child, .rates th:first-child { text-align: left; }
+.rates .num { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.up, .down { font-weight: 700; white-space: nowrap; } .flat { color: var(--muted); white-space: nowrap; }
+.meta { color: var(--muted); font-size: 14px; margin: 8px 0 0; }
+.convert { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; }
+.convert input, .convert select { font: inherit; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); color: var(--text); }
+.convert input { width: 120px; }
+.convert output { font-weight: 800; font-size: 20px; }
+.page-card { margin: 24px 0; }
+.page-card h1 { font-size: 28px; line-height: 1.25; margin: 8px 0; }
+.page-card h2 { font-size: 20px; margin-top: 28px; }
+details { border-top: 1px solid var(--border); padding: 10px 0; }
+details summary { cursor: pointer; font-weight: 700; }
+.src { font-size: 13px; color: var(--muted); }
+header .name { white-space: nowrap; }
+@media (max-width: 420px) {
+  header img { display: none; }
+  header nav { gap: 10px; }
+  .nav-dl { padding: 6px 12px; }
+  .rates { font-size: 15px; }
+  .rates th, .rates td { padding: 8px 6px; }
+}
+.nowrap { white-space: nowrap; }

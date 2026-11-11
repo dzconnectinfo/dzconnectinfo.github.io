@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Euro au square aujourd'hui</title>
+  <meta name="description" content="Le cours de l'euro, du dollar, de la livre et du dollar canadien au square (marché parallèle) d'Alger, achat et vente, et le prix de l'or au gramme, relevés chaque jour par DZ Connect.">
+  <link rel="icon" href="icone.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="site.js"></script>
+  <!--
+    Cette page lit cours.txt (le même fichier que l'appli) : rien à modifier ici pour mettre à jour les cours.
+    La tendance ▲▼ et l'historique viennent des commits de cours.txt sur GitHub (un commit par mise à jour).
+    Comme dans l'appli, un relevé de plus de 2 jours n'est pas affiché.
+  -->
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <img src="icone.svg" alt="">
+      <a class="name" href="./"><span>DZ</span> Connect</a>
+      <nav>
+        <a href="cours.html" aria-current="page">Cours</a>
+        <a href="guide.html">Guide</a>
+        <a class="nav-dl" href="telecharger.html?src=site">Télécharger</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article class="page-card">
+      <h1>L'euro au square aujourd'hui</h1>
+      <p id="when" class="meta">Chargement des cours…</p>
+
+      <div id="stale" class="notice" hidden></div>
+
+      <div id="today" hidden>
+        <h2>Marché parallèle (square)</h2>
+        <table class="rates">
+          <thead><tr><th>1 unité</th><th>Achat</th><th>Vente</th><th>Tendance</th></tr></thead>
+          <tbody id="fx"></tbody>
+        </table>
+        <p class="meta">En dinars algériens. Achat : ce que le cambiste vous donne pour 1 unité. Vente : ce que vous payez pour l'acheter.</p>
+
+        <div id="gold-block">
+          <h2>Or (prix du gramme)</h2>
+          <table class="rates">
+            <thead><tr><th>Or</th><th>Le gramme</th><th>Tendance</th></tr></thead>
+            <tbody id="gold"></tbody>
+          </table>
+        </div>
+
+        <h2>Convertir</h2>
+        <div class="convert">
+          <input id="amount" type="number" inputmode="decimal" min="0" value="100" aria-label="Montant">
+          <select id="cur" aria-label="Devise"></select>
+          <select id="dir" aria-label="Sens">
+            <option value="sell">je les change en dinars</option>
+            <option value="buy">je veux les acheter</option>
+          </select>
+          <span>=</span> <output id="result"></output>
+        </div>
+        <p class="meta">Estimation au cours du square relevé ci-dessus ; le cambiste peut proposer un prix différent.</p>
+      </div>
+
+      <div id="history-block" hidden>
+        <h2>Les derniers relevés</h2>
+        <table class="rates">
+          <thead id="history-head"></thead>
+          <tbody id="history"></tbody>
+        </table>
+      </div>
+
+      <div class="cta" style="margin:28px 0 8px">
+        <h2>Le square dans votre poche</h2>
+        <p>L'appli affiche ces cours chaque matin avec le cours officiel, et vous prévient quand l'euro franchit votre seuil.</p>
+        <a class="button" data-play data-src="site" href="https://play.google.com/store/apps/details?id=com.dzconnect.app">Installer DZ Connect (gratuit)</a>
+      </div>
+
+      <h2>Questions fréquentes</h2>
+      <details>
+        <summary>Qu'est-ce que le square ?</summary>
+        <p>C'est le nom donné au marché parallèle des devises, d'après le square Port-Saïd d'Alger où se tiennent les cambistes. Son cours est fixé par l'offre et la demande et il est bien plus élevé que le cours officiel de la Banque d'Algérie.</p>
+      </details>
+      <details>
+        <summary>D'où viennent ces chiffres ?</summary>
+        <p>Il n'existe pas de cours officiel du square ni de l'or. Ces cours sont relevés chaque jour par DZ Connect, à titre indicatif : ils peuvent varier d'un cambiste ou d'un bijoutier à l'autre et au cours de la journée.</p>
+      </details>
+      <details>
+        <summary>Pourquoi aucun chiffre n'est affiché ?</summary>
+        <p>Pour ne jamais montrer un vieux cours, la page n'affiche rien si le dernier relevé a plus de 2 jours. Revenez plus tard, ou ouvrez l'appli : elle affiche alors les cours lus dans la presse.</p>
+      </details>
+      <details>
+        <summary>Combien de devises peut-on emporter ?</summary>
+        <p>Au-delà de 1 000 € il faut les déclarer à la douane algérienne, à l'entrée comme à la sortie. Tous les détails sont dans notre <a href="guide.html#devises">guide pratique</a>.</p>
+      </details>
+    </article>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="social">
+        <a href="https://www.tiktok.com/@dzconnect.app" aria-label="TikTok"><svg><use href="img/reseaux.svg#tiktok"/></svg></a>
+        <a href="https://www.instagram.com/dzconnect.app/" aria-label="Instagram"><svg><use href="img/reseaux.svg#instagram"/></svg></a>
+        <a href="https://www.facebook.com/profile.php?id=61595925599903" aria-label="Facebook"><svg><use href="img/reseaux.svg#facebook"/></svg></a>
+        <a href="https://whatsapp.com/channel/0029VbDgWKNFCCoMbUskVl0R" aria-label="Chaîne WhatsApp"><svg><use href="img/reseaux.svg#whatsapp"/></svg></a>
+      </div>
+      <a href="confidentialite.html">Confidentialité</a>
+      <a href="conditions.html">Conditions d'utilisation</a>
+      <a href="./#contact">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    var REPO = 'dzconnectinfo/dzconnectinfo.github.io';
+    var NAMES = { EUR: 'Euro', USD: 'Dollar américain', GBP: 'Livre sterling', CAD: 'Dollar canadien', CHF: 'Franc suisse' };
+    var MOIS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+    var $ = function (id) { return document.getElementById(id); };
+
+    // Nombre écrit à la main : « 23 690 », « 170.5 » ou « 173,5 ».
+    function num(s) {
+      var n = parseFloat(String(s).replace(/[\s  ]/g, '').replace(',', '.'));
+      return isFinite(n) && n > 0 ? n : null;
+    }
+    function fmt(n) {
+      return n == null ? '—' : n.toLocaleString('fr-FR', { maximumFractionDigits: 2 });
+    }
+
+    // Lit cours.txt selon le format expliqué dans ses commentaires.
+    function parse(text) {
+      var r = { date: null, time: '', fx: {}, gold: {} };
+      text.split(/\r?\n/).forEach(function (line) {
+        line = line.trim();
+        if (!line || line[0] === '#') return;
+        var m = line.match(/^date\s*:\s*(\d{4})-(\d{2})-(\d{2})\s*(.*)$/i);
+        if (m) { r.date = new Date(+m[1], +m[2] - 1, +m[3]); r.time = m[4].trim(); return; }
+        m = line.match(/^(EUR|USD|GBP|CAD|CHF)\s*:\s*([^/]+?)\s*(?:\/\s*(.+))?$/i);
+        if (m) {
+          var a = num(m[2]), v = m[3] != null ? num(m[3]) : null;
+          if (v == null) { v = a; a = null; }           // « EUR: 276 » = vente seulement
+          if (v != null && v > 20 && v < 2000) r.fx[m[1].toUpperCase()] = { buy: a, sell: v };
+          return;
+        }
+        m = line.match(/^OR\s+(.+?)\s*:\s*(.+)$/i);
+        if (m) {
+          var g = num(m[2]);
+          if (g != null && g > 1000 && g < 200000) r.gold[m[1].replace(/^cass[ée]$/i, 'cassé')] = g;
+        }
+      });
+      return r;
+    }
+
+    function dateFr(d) { return d.getDate() + ' ' + MOIS[d.getMonth()] + ' ' + d.getFullYear(); }
+    function ageDays(d) {
+      var t = new Date(); t.setHours(0, 0, 0, 0);
+      return Math.round((t - d) / 86400000);
+    }
+    function trend(now, before) {
+      if (now == null || before == null) return '<span class="flat">—</span>';
+      var d = Math.round((now - before) * 100) / 100;
+      if (d === 0) return '<span class="flat">= stable</span>';
+      return '<span class="' + (d > 0 ? 'up' : 'down') + '">' + (d > 0 ? '▲ +' : '▼ −') + fmt(Math.abs(d)) + '</span>';
+    }
+    function goldLabel(k) { return k === 'cassé' ? 'Or cassé' : k; }
+
+    var current = null;
+
+    function showToday(c, prev) {
+      var codes = Object.keys(c.fx);
+      $('fx').innerHTML = codes.map(function (k) {
+        var x = c.fx[k], p = prev && prev.fx[k];
+        return '<tr><td>' + (NAMES[k] || k) + ' <span class="meta">(' + k + ')</span></td>' +
+          '<td class="num">' + fmt(x.buy) + '</td><td class="num">' + fmt(x.sell) + '</td>' +
+          '<td>' + trend(x.sell, p && p.sell) + '</td></tr>';
+      }).join('');
+      var gk = Object.keys(c.gold);
+      $('gold-block').hidden = !gk.length;
+      $('gold').innerHTML = gk.map(function (k) {
+        return '<tr><td>' + goldLabel(k) + '</td><td class="num">' + fmt(c.gold[k]) + ' DA</td>' +
+          '<td>' + trend(c.gold[k], prev && prev.gold[k]) + '</td></tr>';
+      }).join('');
+      $('cur').innerHTML = codes.map(function (k) { return '<option>' + k + '</option>'; }).join('');
+      convert();
+      $('today').hidden = false;
+    }
+
+    function convert() {
+      if (!current) return;
+      var x = current.fx[$('cur').value]; if (!x) return;
+      var rate = $('dir').value === 'sell' ? (x.buy || x.sell) : x.sell;
+      var a = num($('amount').value) || 0;
+      $('result').textContent = fmt(Math.round(a * rate)) + ' DA';
+    }
+    ['amount', 'cur', 'dir'].forEach(function (id) { $(id).addEventListener('input', convert); });
+
+    // Anciennes versions de cours.txt, d'après les commits GitHub (gardées en cache : un commit ne change jamais).
+    function cached(key, load) {
+      try { var v = localStorage.getItem(key); if (v) return Promise.resolve(v); } catch (e) {}
+      return load().then(function (v) { try { localStorage.setItem(key, v); } catch (e) {} return v; });
+    }
+    function history() {
+      return fetch('https://api.github.com/repos/' + REPO + '/commits?path=cours.txt&per_page=12')
+        .then(function (r) { if (!r.ok) throw r.status; return r.json(); })
+        .then(function (commits) {
+          return Promise.all(commits.map(function (c) {
+            return cached('cours@' + c.sha, function () {
+              return fetch('https://raw.githubusercontent.com/' + REPO + '/' + c.sha + '/cours.txt').then(function (r) { return r.text(); });
+            }).then(parse).catch(function () { return null; });
+          }));
+        })
+        .then(function (list) {
+          var seen = {}, out = [];               // un relevé par jour (le plus récent de la journée)
+          list.forEach(function (s) {
+            if (!s || !s.date || !Object.keys(s.fx).length) return;
+            var k = s.date.toDateString();
+            if (!seen[k]) { seen[k] = 1; out.push(s); }
+          });
+          return out;
+        });
+    }
+
+    function showHistory(list) {
+      if (list.length < 2) return;
+      var rows = list.slice(0, 7);
+      var g = ['18 carats', '21 carats'].filter(function (k) { return rows[0].gold[k]; });
+      $('history-head').innerHTML = '<tr><th>Date</th><th>Euro (vente)</th><th>Dollar (vente)</th>' +
+        g.map(function (k) { return '<th>Or ' + k + '</th>'; }).join('') + '</tr>';
+      $('history').innerHTML = rows.map(function (s) {
+        return '<tr><td class="nowrap">' + s.date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' }) + '</td>' +
+          '<td class="num">' + fmt(s.fx.EUR && s.fx.EUR.sell) + '</td>' +
+          '<td class="num">' + fmt(s.fx.USD && s.fx.USD.sell) + '</td>' +
+          g.map(function (k) { return '<td class="num">' + fmt(s.gold[k]) + '</td>'; }).join('') + '</tr>';
+      }).join('');
+      $('history-block').hidden = false;
+    }
+
+    fetch('cours.txt', { cache: 'no-store' })
+      .then(function (r) { if (!r.ok) throw r.status; return r.text(); })
+      .then(function (text) {
+        var c = parse(text);
+        if (!c.date || !Object.keys(c.fx).length) {
+          $('when').textContent = 'Aucun relevé publié pour le moment.';
+          return;
+        }
+        var age = ageDays(c.date);
+        $('when').textContent = 'Relevé du ' + dateFr(c.date) + (c.time ? ' à ' + c.time.toLowerCase().replace('h', ' h ') : '') + ' · DZ Connect';
+        if (age > 2) {
+          $('stale').innerHTML = 'Le dernier relevé date du ' + dateFr(c.date) + ' : trop ancien pour être affiché. ' +
+            'Revenez plus tard, ou ouvrez l\'appli DZ Connect, qui affiche les cours lus dans la presse.';
+          $('stale').hidden = false;
+          return;
+        }
+        current = c;
+        showToday(c, null);
+        history().then(function (list) {
+          // Relevé précédent = le premier d'une autre journée que celui affiché.
+          var prev = list.filter(function (s) { return s.date < c.date; })[0];
+          if (prev) showToday(c, prev);
+          showHistory(list);
+        }).catch(function () { /* sans historique, la page reste utile */ });
+      })
+      .catch(function () { $('when').textContent = 'Les cours n\'ont pas pu être chargés. Réessayez dans un instant.'; });
+  })();
+  </script>
+</body>
+</html>
