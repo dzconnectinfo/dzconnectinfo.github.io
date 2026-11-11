@@ -14,7 +14,7 @@
       Instagram : https://dzconnectinfo.github.io/telecharger.html?src=instagram
       Facebook  : https://dzconnectinfo.github.io/telecharger.html?src=facebook
       WhatsApp  : https://dzconnectinfo.github.io/telecharger.html?src=whatsapp
-    Sur Android, le bouton vert ouvre directement l'appli Play Store, même depuis le navigateur
+    Sur Android, le bouton jaune ouvre directement l'appli Play Store, même depuis le navigateur
     intégré de TikTok ou d'Instagram.
   -->
 </head>
@@ -31,21 +31,20 @@
     </div>
   </header>
 
-  <main class="wrap">
-    <section class="hero dl-hero">
-      <img src="icone.svg" alt="Icône de DZ Connect : un carré vert">
+  <section class="hero">
+      <img class="logo" src="icone.svg" alt="Icône de DZ Connect : un carré vert">
       <h1>Installer DZ Connect</h1>
       <p>Gratuit, sans inscription, en français et en arabe. Pour téléphone Android.</p>
 
       <!-- Prévenu quand la page est ouverte dans TikTok, Instagram ou Facebook (rempli par le script). -->
       <div id="inapp" class="notice" hidden></div>
 
-      <a class="button big" data-play href="https://play.google.com/store/apps/details?id=com.dzconnect.app">
-        Installer sur Google Play
-      </a>
-      <a class="store" data-play href="https://play.google.com/store/apps/details?id=com.dzconnect.app">
-        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/fr_badge_web_generic.png" alt="Disponible sur Google Play" width="220">
-      </a>
+      <div class="store-row">
+        <a class="button" data-play href="https://play.google.com/store/apps/details?id=com.dzconnect.app">Installer l'appli</a>
+        <a class="store" data-play href="https://play.google.com/store/apps/details?id=com.dzconnect.app">
+          <img src="img/badge-google-play.png" alt="Disponible sur Google Play" width="196" height="58">
+        </a>
+      </div>
 
       <!-- iPhone : l'appli n'existe pas encore. -->
       <div id="iphone" class="notice" hidden>
@@ -58,14 +57,16 @@
         <img src="img/qr-telecharger.svg" alt="Code QR vers cette page" width="180" height="180">
         <p>Vous êtes sur ordinateur : scannez ce code avec l'appareil photo de votre téléphone Android.</p>
       </div>
-    </section>
+  </section>
 
-    <section class="card steps">
+  <main class="wrap">
+
+    <section class="card steps" style="margin-top:28px">
       <h2>Si Google Play ne s'ouvre pas</h2>
       <ol>
         <li><strong>Vous êtes dans TikTok, Instagram ou Facebook ?</strong> Touchez les trois points
           <b>⋮</b> ou <b>⋯</b> en haut à droite, puis <em>Ouvrir dans le navigateur</em> (ou <em>Ouvrir dans Chrome</em>).
-          Touchez ensuite le bouton vert.</li>
+          Touchez ensuite le bouton jaune.</li>
         <li><strong>Ou cherchez l'appli vous-même :</strong> ouvrez l'appli <em>Play Store</em> de votre téléphone,
           tapez <b>DZ Connect</b> dans la recherche et choisissez l'icône verte ci-dessus.
           <button type="button" class="copy" id="copy">Copier « DZ Connect »</button></li>
@@ -84,10 +85,10 @@
   <footer>
     <div class="wrap">
       <div class="social">
-        <a href="https://www.tiktok.com/@dzconnect.app" aria-label="TikTok"><svg><use href="img/reseaux.svg#tiktok"/></svg></a>
-        <a href="https://www.instagram.com/dzconnect.app/" aria-label="Instagram"><svg><use href="img/reseaux.svg#instagram"/></svg></a>
-        <a href="https://www.facebook.com/profile.php?id=61595925599903" aria-label="Facebook"><svg><use href="img/reseaux.svg#facebook"/></svg></a>
-        <a href="https://whatsapp.com/channel/0029VbDgWKNFCCoMbUskVl0R" aria-label="Chaîne WhatsApp"><svg><use href="img/reseaux.svg#whatsapp"/></svg></a>
+        <a class="net-tiktok" href="https://www.tiktok.com/@dzconnect.app" aria-label="TikTok"><svg><use href="img/reseaux.svg#tiktok"/></svg></a>
+        <a class="net-instagram" href="https://www.instagram.com/dzconnect.app/" aria-label="Instagram"><svg><use href="img/reseaux.svg#instagram"/></svg></a>
+        <a class="net-facebook" href="https://www.facebook.com/profile.php?id=61595925599903" aria-label="Facebook"><svg><use href="img/reseaux.svg#facebook"/></svg></a>
+        <a class="net-whatsapp" href="https://whatsapp.com/channel/0029VbDgWKNFCCoMbUskVl0R" aria-label="Chaîne WhatsApp"><svg><use href="img/reseaux.svg#whatsapp"/></svg></a>
       </div>
       <a href="confidentialite.html">Confidentialité</a>
       <a href="conditions.html">Conditions d'utilisation</a>
@@ -100,7 +101,7 @@
       if (DZ.inApp) {
         var box = document.getElementById('inapp');
         box.innerHTML = 'Vous êtes dans le navigateur de <strong>' + DZ.inApp + '</strong>. ' +
-          'Touchez le bouton vert ; si une page web s\'ouvre au lieu du Play Store, touchez <b>⋮</b> ou <b>⋯</b> ' +
+          'Touchez le bouton jaune ; si une page web s\'ouvre au lieu du Play Store, touchez <b>⋮</b> ou <b>⋯</b> ' +
           'en haut à droite puis <em>Ouvrir dans le navigateur</em>.';
         box.hidden = false;
       }

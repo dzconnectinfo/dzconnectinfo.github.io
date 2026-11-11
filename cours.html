@@ -5,14 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Euro au square aujourd'hui</title>
   <meta name="description" content="Le cours de l'euro, du dollar, de la livre et du dollar canadien au square (marché parallèle) d'Alger, achat et vente, et le prix de l'or au gramme, relevés chaque jour par DZ Connect.">
+  <meta name="theme-color" content="#00704A">
   <link rel="icon" href="icone.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
   <script src="site.js"></script>
   <!--
     Cette page lit cours.txt (le même fichier que l'appli) : rien à modifier ici pour mettre à jour les cours.
-    La tendance ▲▼ et l'historique viennent des commits de cours.txt sur GitHub (un commit par mise à jour).
+    La tendance ▲▼, la courbe et l'historique viennent des commits de cours.txt sur GitHub (un commit par mise à jour).
     Comme dans l'appli, un relevé de plus de 2 jours n'est pas affiché.
   -->
+  <style>
+    .rate-hero { padding-bottom: 36px; }
+    .rate-hero .when { color: #D5EDE0; font-size: 15px; margin-top: 6px; }
+    .big { display: inline-flex; flex-direction: column; align-items: center; margin-top: 22px; }
+    .big .label { font-size: 15px; color: #D5EDE0; }
+    .big .value { font-size: 56px; font-weight: 800; line-height: 1.05; letter-spacing: -1px; }
+    .big .value small { font-size: 24px; font-weight: 700; }
+    .big .sub { font-size: 15px; color: #D5EDE0; margin-top: 4px; }
+    .chip-trend { display: inline-block; margin-top: 12px; padding: 4px 12px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-weight: 800; font-size: 15px; }
+    .spark { display: block; margin: 18px auto 0; width: 100%; max-width: 360px; height: 64px; }
+    .spark-cap { font-size: 13px; color: #BFE0CE; margin-top: 2px; }
+
+    .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 18px 18px 10px; margin: 20px 0; box-shadow: var(--shadow); }
+    .panel h2 { font-size: 19px; margin: 0 0 6px; }
+    .row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid var(--border); }
+    .row:first-of-type { border-top: 0; }
+    .code { flex: none; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: var(--mint); color: var(--green); font-weight: 800; font-size: 14px; }
+    .who { flex: 1; min-width: 0; }
+    .who b { display: block; font-size: 17px; }
+    .who span { color: var(--muted); font-size: 13px; }
+    .chips { display: flex; gap: 6px; }
+    .chip { min-width: 74px; text-align: center; border-radius: 12px; padding: 5px 8px; background: var(--surface-2); }
+    .chip span { display: block; font-size: 12px; color: var(--muted); }
+    .chip b { font-size: 18px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .chip.sell { background: var(--sell); color: var(--sell-text); }
+    .chip.sell span { color: inherit; opacity: .8; }
+    .tr { display: block; font-size: 12px; font-weight: 700; margin-top: 1px; white-space: nowrap; }
+    .tr.flat { color: var(--muted); font-weight: 400; }
+
+    .convert { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 8px 0 12px; }
+    .convert input, .convert select { font: inherit; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); }
+    .convert input { width: 120px; }
+    .result { width: 100%; margin-top: 4px; font-size: 30px; font-weight: 800; color: var(--green); }
+
+    .hist { width: 100%; display: table; font-size: 15px; margin: 6px 0 12px; }
+    .hist th, .hist td { text-align: right; border: 0; border-bottom: 1px solid var(--border); padding: 9px 6px; }
+    .hist th { background: none; color: var(--muted); font-weight: 600; font-size: 13px; }
+    .hist td:first-child, .hist th:first-child { text-align: left; white-space: nowrap; }
+    .hist td { font-variant-numeric: tabular-nums; }
+    @media (max-width: 480px) {
+      .big .value { font-size: 46px; }
+      .chip { min-width: 62px; padding: 4px 6px; }
+      .chip b { font-size: 16px; }
+      .who b { font-size: 15px; }
+      .code { width: 40px; height: 40px; font-size: 12px; }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -27,29 +75,34 @@
     </div>
   </header>
 
+  <section class="hero rate-hero">
+    <h1>L'euro au <em>square</em> aujourd'hui</h1>
+    <p id="when" class="when">Chargement des cours…</p>
+    <div id="stale" class="notice" hidden></div>
+    <div id="eur-big" class="big" hidden>
+      <span class="label">1 euro se vend</span>
+      <span class="value"><span id="eur-sell"></span> <small>DA</small></span>
+      <span class="sub" id="eur-buy"></span>
+      <span class="chip-trend" id="eur-trend" hidden></span>
+    </div>
+    <svg id="spark" class="spark" viewBox="0 0 360 64" preserveAspectRatio="none" hidden aria-hidden="true"></svg>
+    <div id="spark-cap" class="spark-cap" hidden></div>
+  </section>
+
   <main class="wrap">
-    <article class="page-card">
-      <h1>L'euro au square aujourd'hui</h1>
-      <p id="when" class="meta">Chargement des cours…</p>
-
-      <div id="stale" class="notice" hidden></div>
-
-      <div id="today" hidden>
+    <div id="today" hidden>
+      <section class="panel">
         <h2>Marché parallèle (square)</h2>
-        <table class="rates">
-          <thead><tr><th>1 unité</th><th>Achat</th><th>Vente</th><th>Tendance</th></tr></thead>
-          <tbody id="fx"></tbody>
-        </table>
-        <p class="meta">En dinars algériens. Achat : ce que le cambiste vous donne pour 1 unité. Vente : ce que vous payez pour l'acheter.</p>
+        <div id="fx"></div>
+        <p class="meta" style="margin-bottom:8px">En dinars. <b>Achat</b> : ce que le cambiste vous donne pour 1 unité. <b>Vente</b> : ce que vous payez pour l'acheter.</p>
+      </section>
 
-        <div id="gold-block">
-          <h2>Or (prix du gramme)</h2>
-          <table class="rates">
-            <thead><tr><th>Or</th><th>Le gramme</th><th>Tendance</th></tr></thead>
-            <tbody id="gold"></tbody>
-          </table>
-        </div>
+      <section class="panel" id="gold-block">
+        <h2>Or (prix du gramme)</h2>
+        <div id="gold"></div>
+      </section>
 
+      <section class="panel">
         <h2>Convertir</h2>
         <div class="convert">
           <input id="amount" type="number" inputmode="decimal" min="0" value="100" aria-label="Montant">
@@ -58,25 +111,32 @@
             <option value="sell">je les change en dinars</option>
             <option value="buy">je veux les acheter</option>
           </select>
-          <span>=</span> <output id="result"></output>
+          <output id="result" class="result"></output>
         </div>
-        <p class="meta">Estimation au cours du square relevé ci-dessus ; le cambiste peut proposer un prix différent.</p>
-      </div>
+        <p class="meta" style="margin-bottom:8px">Estimation au cours du square relevé ci-dessus ; le cambiste peut proposer un prix différent.</p>
+      </section>
+    </div>
 
-      <div id="history-block" hidden>
-        <h2>Les derniers relevés</h2>
-        <table class="rates">
-          <thead id="history-head"></thead>
-          <tbody id="history"></tbody>
-        </table>
-      </div>
+    <section class="panel" id="history-block" hidden>
+      <h2>Les derniers relevés</h2>
+      <table class="hist">
+        <thead id="history-head"></thead>
+        <tbody id="history"></tbody>
+      </table>
+    </section>
 
-      <div class="cta" style="margin:28px 0 8px">
-        <h2>Le square dans votre poche</h2>
-        <p>L'appli affiche ces cours chaque matin avec le cours officiel, et vous prévient quand l'euro franchit votre seuil.</p>
-        <a class="button" data-play data-src="site" href="https://play.google.com/store/apps/details?id=com.dzconnect.app">Installer DZ Connect (gratuit)</a>
+    <div class="cta">
+      <h2>Le square dans votre poche</h2>
+      <p>L'appli affiche ces cours chaque matin avec le cours officiel, et vous prévient quand l'euro franchit votre seuil.</p>
+      <div class="store-row">
+        <a class="button" data-play data-src="site" href="https://play.google.com/store/apps/details?id=com.dzconnect.app">Installer l'appli</a>
+        <a class="store" data-play data-src="site" href="https://play.google.com/store/apps/details?id=com.dzconnect.app">
+          <img src="img/badge-google-play.png" alt="Disponible sur Google Play" width="196" height="58">
+        </a>
       </div>
+    </div>
 
+    <section class="panel">
       <h2>Questions fréquentes</h2>
       <details>
         <summary>Qu'est-ce que le square ?</summary>
@@ -94,16 +154,16 @@
         <summary>Combien de devises peut-on emporter ?</summary>
         <p>Au-delà de 1 000 € il faut les déclarer à la douane algérienne, à l'entrée comme à la sortie. Tous les détails sont dans notre <a href="guide.html#devises">guide pratique</a>.</p>
       </details>
-    </article>
+    </section>
   </main>
 
   <footer>
     <div class="wrap">
       <div class="social">
-        <a href="https://www.tiktok.com/@dzconnect.app" aria-label="TikTok"><svg><use href="img/reseaux.svg#tiktok"/></svg></a>
-        <a href="https://www.instagram.com/dzconnect.app/" aria-label="Instagram"><svg><use href="img/reseaux.svg#instagram"/></svg></a>
-        <a href="https://www.facebook.com/profile.php?id=61595925599903" aria-label="Facebook"><svg><use href="img/reseaux.svg#facebook"/></svg></a>
-        <a href="https://whatsapp.com/channel/0029VbDgWKNFCCoMbUskVl0R" aria-label="Chaîne WhatsApp"><svg><use href="img/reseaux.svg#whatsapp"/></svg></a>
+        <a class="net-tiktok" href="https://www.tiktok.com/@dzconnect.app" aria-label="TikTok"><svg><use href="img/reseaux.svg#tiktok"/></svg></a>
+        <a class="net-instagram" href="https://www.instagram.com/dzconnect.app/" aria-label="Instagram"><svg><use href="img/reseaux.svg#instagram"/></svg></a>
+        <a class="net-facebook" href="https://www.facebook.com/profile.php?id=61595925599903" aria-label="Facebook"><svg><use href="img/reseaux.svg#facebook"/></svg></a>
+        <a class="net-whatsapp" href="https://whatsapp.com/channel/0029VbDgWKNFCCoMbUskVl0R" aria-label="Chaîne WhatsApp"><svg><use href="img/reseaux.svg#whatsapp"/></svg></a>
       </div>
       <a href="confidentialite.html">Confidentialité</a>
       <a href="conditions.html">Conditions d'utilisation</a>
@@ -114,7 +174,7 @@
   <script>
   (function () {
     var REPO = 'dzconnectinfo/dzconnectinfo.github.io';
-    var NAMES = { EUR: 'Euro', USD: 'Dollar américain', GBP: 'Livre sterling', CAD: 'Dollar canadien', CHF: 'Franc suisse' };
+    var NAMES = { EUR: ['Euro', '1 €'], USD: ['Dollar américain', '1 $ US'], GBP: ['Livre sterling', '1 £'], CAD: ['Dollar canadien', '1 $ CA'], CHF: ['Franc suisse', '1 CHF'] };
     var MOIS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
     var $ = function (id) { return document.getElementById(id); };
 
@@ -123,9 +183,7 @@
       var n = parseFloat(String(s).replace(/[\s  ]/g, '').replace(',', '.'));
       return isFinite(n) && n > 0 ? n : null;
     }
-    function fmt(n) {
-      return n == null ? '—' : n.toLocaleString('fr-FR', { maximumFractionDigits: 2 });
-    }
+    function fmt(n) { return n == null ? '—' : n.toLocaleString('fr-FR', { maximumFractionDigits: 2 }); }
 
     // Lit cours.txt selon le format expliqué dans ses commentaires.
     function parse(text) {
@@ -152,33 +210,43 @@
     }
 
     function dateFr(d) { return d.getDate() + ' ' + MOIS[d.getMonth()] + ' ' + d.getFullYear(); }
-    function ageDays(d) {
-      var t = new Date(); t.setHours(0, 0, 0, 0);
-      return Math.round((t - d) / 86400000);
-    }
+    function ageDays(d) { var t = new Date(); t.setHours(0, 0, 0, 0); return Math.round((t - d) / 86400000); }
+    function delta(now, before) { return now == null || before == null ? null : Math.round((now - before) * 100) / 100; }
     function trend(now, before) {
-      if (now == null || before == null) return '<span class="flat">—</span>';
-      var d = Math.round((now - before) * 100) / 100;
-      if (d === 0) return '<span class="flat">= stable</span>';
-      return '<span class="' + (d > 0 ? 'up' : 'down') + '">' + (d > 0 ? '▲ +' : '▼ −') + fmt(Math.abs(d)) + '</span>';
+      var d = delta(now, before);
+      if (d == null) return '';
+      if (d === 0) return '<span class="tr flat">= stable</span>';
+      return '<span class="tr">' + (d > 0 ? '▲ +' : '▼ −') + fmt(Math.abs(d)) + '</span>';
     }
-    function goldLabel(k) { return k === 'cassé' ? 'Or cassé' : k; }
 
     var current = null;
 
     function showToday(c, prev) {
+      var e = c.fx.EUR;
+      if (e) {
+        $('eur-sell').textContent = fmt(e.sell);
+        $('eur-buy').textContent = e.buy ? 'Achat : ' + fmt(e.buy) + ' DA' : '';
+        var d = prev && prev.fx.EUR ? delta(e.sell, prev.fx.EUR.sell) : null;
+        if (d != null) {
+          $('eur-trend').textContent = d === 0 ? '= stable depuis le dernier relevé' : (d > 0 ? '▲ +' : '▼ −') + fmt(Math.abs(d)) + ' DA depuis le dernier relevé';
+          $('eur-trend').hidden = false;
+        }
+        $('eur-big').hidden = false;
+      }
       var codes = Object.keys(c.fx);
       $('fx').innerHTML = codes.map(function (k) {
-        var x = c.fx[k], p = prev && prev.fx[k];
-        return '<tr><td>' + (NAMES[k] || k) + ' <span class="meta">(' + k + ')</span></td>' +
-          '<td class="num">' + fmt(x.buy) + '</td><td class="num">' + fmt(x.sell) + '</td>' +
-          '<td>' + trend(x.sell, p && p.sell) + '</td></tr>';
+        var x = c.fx[k], p = prev && prev.fx[k], n = NAMES[k] || [k, '1 ' + k];
+        return '<div class="row"><div class="code">' + k + '</div><div class="who"><b>' + n[0] + '</b><span>' + n[1] + '</span></div>' +
+          '<div class="chips">' +
+          (x.buy ? '<div class="chip"><span>Achat</span><b>' + fmt(x.buy) + '</b></div>' : '') +
+          '<div class="chip sell"><span>Vente</span><b>' + fmt(x.sell) + '</b>' + trend(x.sell, p && p.sell) + '</div>' +
+          '</div></div>';
       }).join('');
       var gk = Object.keys(c.gold);
       $('gold-block').hidden = !gk.length;
       $('gold').innerHTML = gk.map(function (k) {
-        return '<tr><td>' + goldLabel(k) + '</td><td class="num">' + fmt(c.gold[k]) + ' DA</td>' +
-          '<td>' + trend(c.gold[k], prev && prev.gold[k]) + '</td></tr>';
+        return '<div class="row"><div class="code">Au</div><div class="who"><b>' + (k === 'cassé' ? 'Or cassé' : k) + '</b><span>le gramme</span></div>' +
+          '<div class="chips"><div class="chip"><span>DA</span><b>' + fmt(c.gold[k]) + '</b>' + trend(c.gold[k], prev && prev.gold[k]) + '</div></div></div>';
       }).join('');
       $('cur').innerHTML = codes.map(function (k) { return '<option>' + k + '</option>'; }).join('');
       convert();
@@ -190,7 +258,7 @@
       var x = current.fx[$('cur').value]; if (!x) return;
       var rate = $('dir').value === 'sell' ? (x.buy || x.sell) : x.sell;
       var a = num($('amount').value) || 0;
-      $('result').textContent = fmt(Math.round(a * rate)) + ' DA';
+      $('result').textContent = '= ' + fmt(Math.round(a * rate)) + ' DA';
     }
     ['amount', 'cur', 'dir'].forEach(function (id) { $(id).addEventListener('input', convert); });
 
@@ -200,7 +268,7 @@
       return load().then(function (v) { try { localStorage.setItem(key, v); } catch (e) {} return v; });
     }
     function history() {
-      return fetch('https://api.github.com/repos/' + REPO + '/commits?path=cours.txt&per_page=12')
+      return fetch('https://api.github.com/repos/' + REPO + '/commits?path=cours.txt&per_page=15')
         .then(function (r) { if (!r.ok) throw r.status; return r.json(); })
         .then(function (commits) {
           return Promise.all(commits.map(function (c) {
@@ -220,17 +288,33 @@
         });
     }
 
+    // Petite courbe de l'euro (vente) sur les derniers relevés, dans le bandeau vert.
+    function showSpark(list) {
+      var pts = list.slice(0, 10).filter(function (s) { return s.fx.EUR; }).reverse();
+      if (pts.length < 3) return;
+      var v = pts.map(function (s) { return s.fx.EUR.sell; });
+      var min = Math.min.apply(null, v), max = Math.max.apply(null, v), span = (max - min) || 1;
+      var xy = v.map(function (y, i) { return [8 + i * 344 / (v.length - 1), 54 - (y - min) / span * 44]; });
+      var line = xy.map(function (p, i) { return (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join(' ');
+      var last = xy[xy.length - 1];
+      $('spark').innerHTML = '<path d="' + line + '" fill="none" stroke="#F5C542" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>' +
+        '<circle cx="' + last[0] + '" cy="' + last[1] + '" r="5" fill="#F5C542"/>';
+      $('spark').hidden = false;
+      $('spark-cap').textContent = 'Euro (vente) sur les ' + v.length + ' derniers relevés : de ' + fmt(min) + ' à ' + fmt(max) + ' DA';
+      $('spark-cap').hidden = false;
+    }
+
     function showHistory(list) {
       if (list.length < 2) return;
       var rows = list.slice(0, 7);
       var g = ['18 carats', '21 carats'].filter(function (k) { return rows[0].gold[k]; });
-      $('history-head').innerHTML = '<tr><th>Date</th><th>Euro (vente)</th><th>Dollar (vente)</th>' +
-        g.map(function (k) { return '<th>Or ' + k + '</th>'; }).join('') + '</tr>';
+      $('history-head').innerHTML = '<tr><th>Date</th><th>Euro</th><th>Dollar</th>' +
+        g.map(function (k) { return '<th>Or ' + k.replace(' carats', ' c') + '</th>'; }).join('') + '</tr>';
       $('history').innerHTML = rows.map(function (s) {
-        return '<tr><td class="nowrap">' + s.date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' }) + '</td>' +
-          '<td class="num">' + fmt(s.fx.EUR && s.fx.EUR.sell) + '</td>' +
-          '<td class="num">' + fmt(s.fx.USD && s.fx.USD.sell) + '</td>' +
-          g.map(function (k) { return '<td class="num">' + fmt(s.gold[k]) + '</td>'; }).join('') + '</tr>';
+        return '<tr><td>' + s.date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' }) + '</td>' +
+          '<td>' + fmt(s.fx.EUR && s.fx.EUR.sell) + '</td>' +
+          '<td>' + fmt(s.fx.USD && s.fx.USD.sell) + '</td>' +
+          g.map(function (k) { return '<td>' + fmt(s.gold[k]) + '</td>'; }).join('') + '</tr>';
       }).join('');
       $('history-block').hidden = false;
     }
@@ -239,13 +323,9 @@
       .then(function (r) { if (!r.ok) throw r.status; return r.text(); })
       .then(function (text) {
         var c = parse(text);
-        if (!c.date || !Object.keys(c.fx).length) {
-          $('when').textContent = 'Aucun relevé publié pour le moment.';
-          return;
-        }
-        var age = ageDays(c.date);
+        if (!c.date || !Object.keys(c.fx).length) { $('when').textContent = 'Aucun relevé publié pour le moment.'; return; }
         $('when').textContent = 'Relevé du ' + dateFr(c.date) + (c.time ? ' à ' + c.time.toLowerCase().replace('h', ' h ') : '') + ' · DZ Connect';
-        if (age > 2) {
+        if (ageDays(c.date) > 2) {
           $('stale').innerHTML = 'Le dernier relevé date du ' + dateFr(c.date) + ' : trop ancien pour être affiché. ' +
             'Revenez plus tard, ou ouvrez l\'appli DZ Connect, qui affiche les cours lus dans la presse.';
           $('stale').hidden = false;
@@ -254,9 +334,9 @@
         current = c;
         showToday(c, null);
         history().then(function (list) {
-          // Relevé précédent = le premier d'une autre journée que celui affiché.
-          var prev = list.filter(function (s) { return s.date < c.date; })[0];
+          var prev = list.filter(function (s) { return s.date < c.date; })[0];   // relevé d'une journée précédente
           if (prev) showToday(c, prev);
+          showSpark(list);
           showHistory(list);
         }).catch(function () { /* sans historique, la page reste utile */ });
       })

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DZ Connect</title>
   <meta name="description" content="DZ Connect : l'actualité de l'Algérie triée par importance, l'euro au square, les vols, le ferry, la météo et les heures de prière, en français et en arabe. Application Android gratuite.">
+  <meta name="theme-color" content="#00704A">
   <link rel="icon" href="icone.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
   <script src="site.js"></script>
@@ -22,71 +23,63 @@
     </div>
   </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <img src="icone.svg" alt="Logo DZ Connect">
-      <h1>L'actualité d'Algérie, où que vous soyez</h1>
-      <p>L'actualité de l'Algérie triée par importance, l'euro au square, les vols et le ferry, la météo et les heures de prière : tout au même endroit, en français et en arabe. Pour les Algériens au pays et à l'étranger.</p>
-      <!-- Bouton et badge Google Play : sur Android, ils ouvrent directement l'appli Play Store (site.js). -->
-      <a class="button big" data-play data-src="site" href="https://play.google.com/store/apps/details?id=com.dzconnect.app&amp;referrer=utm_source%3Dsite%26utm_medium%3Dweb">Télécharger gratuitement</a>
+  <section class="hero">
+    <img class="logo" src="icone.svg" alt="Logo DZ Connect">
+    <h1>L'actualité d'Algérie, <em>où que vous soyez</em></h1>
+    <p>L'actu triée par importance, l'euro au square, les vols et le ferry, la météo et les heures de prière : tout au même endroit, en français et en arabe.</p>
+    <!-- Bouton et badge Google Play : sur Android, ils ouvrent directement l'appli Play Store (site.js). -->
+    <div class="store-row">
+      <a class="button" data-play data-src="site" href="https://play.google.com/store/apps/details?id=com.dzconnect.app&amp;referrer=utm_source%3Dsite%26utm_medium%3Dweb">Télécharger l'appli</a>
       <a class="store" data-play data-src="site" href="https://play.google.com/store/apps/details?id=com.dzconnect.app&amp;referrer=utm_source%3Dsite%26utm_medium%3Dweb">
-        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/fr_badge_web_generic.png" alt="Disponible sur Google Play" width="220">
+        <img src="img/badge-google-play.png" alt="Disponible sur Google Play" width="196" height="58">
       </a>
-      <p class="lead-dl">Pour téléphone Android. Ou ouvrez l'appli <em>Play Store</em> et cherchez <strong>DZ Connect</strong>.
-        <a href="telecharger.html?src=site">Besoin d'aide pour l'installer ?</a></p>
-    </section>
+    </div>
+    <p class="lead-dl">Pour téléphone Android. Ou ouvrez l'appli <em>Play Store</em> et cherchez <strong>DZ Connect</strong>.<br>
+      <a href="telecharger.html?src=site">Besoin d'aide pour l'installer ?</a></p>
+  </section>
 
+  <main class="wrap">
     <section class="cards">
-      <div class="card">
-        <h2>L'actu triée pour vous</h2>
-        <p>Une trentaine de médias algériens et internationaux, sans doublons, le plus important d'abord.</p>
-      </div>
-      <div class="card">
-        <h2>L'euro au square</h2>
-        <p>Le cours du marché parallèle relevé chaque jour, achat et vente, et le cours officiel.</p>
-      </div>
-      <div class="card">
-        <h2>Vols et ferry</h2>
-        <p>Les billets les moins chers trouvés vers l'Algérie et toutes les traversées en ferry.</p>
-      </div>
-      <div class="card">
-        <h2>Prières et météo</h2>
-        <p>Les heures de prière de votre ville et la météo, ici et chez la famille.</p>
-      </div>
-      <div class="card">
-        <h2>Des alertes discrètes</h2>
-        <p>Une notification groupée pour l'essentiel, jamais la nuit, et un résumé chaque matin.</p>
-      </div>
-      <div class="card">
-        <h2>Sans inscription</h2>
-        <p>Aucun compte à créer. Vos favoris et réglages restent sur votre téléphone.</p>
-      </div>
+      <div class="card"><div class="ico">📰</div><h2>L'actu triée pour vous</h2>
+        <p>Une trentaine de médias algériens et internationaux, sans doublons, le plus important d'abord.</p></div>
+      <div class="card"><div class="ico">💶</div><h2>L'euro au square</h2>
+        <p>Le cours du marché parallèle relevé chaque jour, achat et vente, l'or et le cours officiel.</p></div>
+      <div class="card"><div class="ico">✈️</div><h2>Vols et ferry</h2>
+        <p>Les billets les moins chers trouvés vers l'Algérie et toutes les traversées en ferry.</p></div>
+      <div class="card"><div class="ico">🕌</div><h2>Prières et météo</h2>
+        <p>Les heures de prière de votre ville et la météo, ici et chez la famille.</p></div>
+      <div class="card"><div class="ico">🔔</div><h2>Des alertes discrètes</h2>
+        <p>Une notification groupée pour l'essentiel, jamais la nuit, et un résumé chaque matin.</p></div>
+      <div class="card"><div class="ico">🔒</div><h2>Sans inscription</h2>
+        <p>Aucun compte à créer. Vos favoris et réglages restent sur votre téléphone.</p></div>
     </section>
 
     <h2 class="section">L'appli en images</h2>
-    <div class="gallery" aria-label="Captures de l'application">
-      <img src="img/1-actualite.webp" alt="Toute l'actu d'Algérie et de la diaspora" loading="lazy" width="260" height="260">
-      <img src="img/2-square.webp" alt="Le square du jour : euro, dollar, livre, dollar canadien et or" loading="lazy" width="260" height="260">
-      <img src="img/3-vols.webp" alt="Les billets d'avion les moins chers vers l'Algérie" loading="lazy" width="260" height="260">
-      <img src="img/4-priere.webp" alt="Les heures de prière ici et au pays" loading="lazy" width="260" height="260">
-      <img src="img/5-meteo.webp" alt="La météo de vos deux villes" loading="lazy" width="260" height="260">
-      <img src="img/6-alertes.webp" alt="Des alertes sur ce qui compte, jamais la nuit" loading="lazy" width="260" height="260">
+    <div class="gallery" aria-label="Aperçus de l'application">
+      <img src="img/promo-actu.webp" alt="L'actu d'Algérie, triée pour vous" loading="lazy" width="216" height="384">
+      <img src="img/promo-square.webp" alt="L'euro au square ce matin : 276,5 DA" loading="lazy" width="216" height="384">
+      <img src="img/promo-journee.webp" alt="Ta journée avec DZ Connect : square, actualité, prière" loading="lazy" width="216" height="384">
+      <img src="img/promo-monde.webp" alt="En Algérie, en France ou au Canada" loading="lazy" width="216" height="384">
+      <img src="img/promo-reponses.webp" alt="Square, prière, actualité : DZ Connect répond à tout" loading="lazy" width="216" height="384">
+      <img src="img/promo-euro.webp" alt="Combien vaut l'euro au square ?" loading="lazy" width="216" height="384">
     </div>
 
-    <section class="cta">
-      <h2>Le square et le guide du voyageur, sans installer</h2>
-      <p>Consultez <a href="cours.html">l'euro au square aujourd'hui</a> et notre <a href="guide.html">guide pratique</a> : devises à déclarer, douane, passeport, internet en arrivant.</p>
-    </section>
+    <div class="links-row">
+      <a class="card" href="cours.html"><div class="ico">📈</div><h2>L'euro au square aujourd'hui →</h2>
+        <p>Achat, vente, tendance et prix de l'or, sans installer l'appli.</p></a>
+      <a class="card" href="guide.html"><div class="ico">🧳</div><h2>Guide pratique du voyage →</h2>
+        <p>Devises à déclarer, douane, passeport, internet en arrivant.</p></a>
+    </div>
 
     <h2 class="section">Suivez DZ Connect</h2>
     <div class="follow">
-      <a class="card" href="https://www.tiktok.com/@dzconnect.app"><svg><use href="img/reseaux.svg#tiktok"/></svg><span>TikTok<small>@dzconnect.app</small></span></a>
-      <a class="card" href="https://www.instagram.com/dzconnect.app/"><svg><use href="img/reseaux.svg#instagram"/></svg><span>Instagram<small>@dzconnect.app</small></span></a>
-      <a class="card" href="https://www.facebook.com/profile.php?id=61595925599903"><svg><use href="img/reseaux.svg#facebook"/></svg><span>Facebook<small>DZ Connect</small></span></a>
-      <a class="card" href="https://whatsapp.com/channel/0029VbDgWKNFCCoMbUskVl0R"><svg><use href="img/reseaux.svg#whatsapp"/></svg><span>WhatsApp<small>Notre chaîne</small></span></a>
+      <a class="card" href="https://www.tiktok.com/@dzconnect.app"><span class="pill net-tiktok"><svg><use href="img/reseaux.svg#tiktok"/></svg></span><span>TikTok<small>@dzconnect.app</small></span></a>
+      <a class="card" href="https://www.instagram.com/dzconnect.app/"><span class="pill net-instagram"><svg><use href="img/reseaux.svg#instagram"/></svg></span><span>Instagram<small>@dzconnect.app</small></span></a>
+      <a class="card" href="https://www.facebook.com/profile.php?id=61595925599903"><span class="pill net-facebook"><svg><use href="img/reseaux.svg#facebook"/></svg></span><span>Facebook<small>DZ Connect</small></span></a>
+      <a class="card" href="https://whatsapp.com/channel/0029VbDgWKNFCCoMbUskVl0R"><span class="pill net-whatsapp"><svg><use href="img/reseaux.svg#whatsapp"/></svg></span><span>WhatsApp<small>Notre chaîne</small></span></a>
     </div>
 
-    <section id="contact" class="card" style="margin-bottom: 48px">
+    <section id="contact" class="card" style="margin-top: 32px">
       <h2>Contact</h2>
       <p>Une question, une source à proposer, un problème ? Écrivez-nous à
         <a href="mailto:contact.dzconnect@gmail.com">contact.dzconnect@gmail.com</a>.
@@ -97,10 +90,10 @@
   <footer>
     <div class="wrap">
       <div class="social">
-        <a href="https://www.tiktok.com/@dzconnect.app" aria-label="TikTok"><svg><use href="img/reseaux.svg#tiktok"/></svg></a>
-        <a href="https://www.instagram.com/dzconnect.app/" aria-label="Instagram"><svg><use href="img/reseaux.svg#instagram"/></svg></a>
-        <a href="https://www.facebook.com/profile.php?id=61595925599903" aria-label="Facebook"><svg><use href="img/reseaux.svg#facebook"/></svg></a>
-        <a href="https://whatsapp.com/channel/0029VbDgWKNFCCoMbUskVl0R" aria-label="Chaîne WhatsApp"><svg><use href="img/reseaux.svg#whatsapp"/></svg></a>
+        <a class="net-tiktok" href="https://www.tiktok.com/@dzconnect.app" aria-label="TikTok"><svg><use href="img/reseaux.svg#tiktok"/></svg></a>
+        <a class="net-instagram" href="https://www.instagram.com/dzconnect.app/" aria-label="Instagram"><svg><use href="img/reseaux.svg#instagram"/></svg></a>
+        <a class="net-facebook" href="https://www.facebook.com/profile.php?id=61595925599903" aria-label="Facebook"><svg><use href="img/reseaux.svg#facebook"/></svg></a>
+        <a class="net-whatsapp" href="https://whatsapp.com/channel/0029VbDgWKNFCCoMbUskVl0R" aria-label="Chaîne WhatsApp"><svg><use href="img/reseaux.svg#whatsapp"/></svg></a>
       </div>
       DZ Connect n'héberge aucun article : chaque article s'ouvre sur le site du média qui l'a publié.<br>
       <a href="confidentialite.html">Politique de confidentialité</a>
