@@ -167,3 +167,14 @@ footer a { margin: 0 8px; }
   article { padding: 4px 16px 16px; }
   .gallery img { width: 184px; height: 327px; }
 }
+
+/* Menu : sur téléphone, l'icône remplace le nom pour laisser la place à « Accueil ». */
+h2.section.first { margin-top: 28px; }
+.follow { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+@media (max-width: 480px) {
+  header img { display: block; width: 32px; height: 32px; }
+  header .name { display: none; }
+  header nav { gap: 11px; }
+  .follow a { padding: 12px; gap: 10px; }
+  .follow .pill { width: 38px; height: 38px; }
+}
