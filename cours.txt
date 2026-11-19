@@ -10,10 +10,10 @@
 # Pour retirer une ligne, mettre un # devant.
 
 date: 2026-11-18 10h30
-EUR: 274.5 / 276.5
+EUR: 274 / 276
 USD: 244 / 247
 GBP: 314 / 316
-CAD: 172 / 173.5
-OR 18 carats: 22 090
-OR 21 carats: 26 770
+CAD: 172 / 173
+OR 18 carats: 21 960
+OR 21 carats: 25 620
 OR Cassé: 23 200
